@@ -16,7 +16,7 @@
     @import url(https://fonts.googleapis.com/icon?family=Material+Icons);
 </style>
 <div class="container">
-    <form class="col s12">
+    <form class="col s12" method="post" action="?controller=usuarioComun&action=start">
         <div class="row">
             <div class="input-field hoverable col s12">
                 <i class="material-icons prefix">account_circle</i>

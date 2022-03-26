@@ -14,14 +14,24 @@ class usuarioComunController{
         require_once ('Views/Usuarios/index.php');
     }
 
-    public function start(){
-        require_once ('Views/Usuarios/start.php');
+
+    // API SERVICE: Métodos CRUD
+
+    public function register(){
+        $nombre=$_POST['nombre'];
+        $correo=$_POST['correo'];
+        $foto=$_POST['foto'];
+
+        if($_POST['contraseña']==$_POST['repContraseña']){
+            $contraseña=password_hash($_POST['contraseña'],PASSWORD_DEFAULT);
+        }
+
+        $conexion=DB::getConnect();
+        $insertar=$conexion->query("call registrar_usuario('$nombre','$contraseña','$correo','$foto')");
+
+        require_once('Views/Usuarios/start.php');
     }
 
-    // API SERVICE
-    public function register(){
-        require_once ('Views/Usuarios/register.php');
-    }
 
     public function delete(){
 

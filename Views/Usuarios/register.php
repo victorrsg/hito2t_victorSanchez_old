@@ -9,7 +9,7 @@
 
                                 <p class="text-center h1 fw-bold mb-5 mx-1 mx-md-4 mt-4">Registrarse</p>
 
-                                <form class="mx-1 mx-md-4" action="../../Controllers/usuarioComunController.php">
+                                <form class="mx-1 mx-md-4" action="?controller=usuarioComun&action=register" method="post">
 
                                     <div class="d-flex flex-row align-items-center mb-4">
                                         <i class="fas fa-user fa-lg me-3 fa-fw"></i>
@@ -57,12 +57,13 @@
                                                 type="checkbox"
                                                 value=""
                                                 id="check"
+                                                required
                                         />
-                                        <label class="form-check-label" for="aceptar">Aceptar términos y registrar usuario</label>
+                                        <label class="form-check-label" for="aceptar" >Aceptar términos y registrar usuario</label>
                                     </div>
 
                                     <div class="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
-                                        <button type="button" class="btn btn-primary btn-lg">Register</button>
+                                        <input type="submit" class="btn btn-primary btn-lg" value="Registrar">
                                     </div>
 
                                 </form>
