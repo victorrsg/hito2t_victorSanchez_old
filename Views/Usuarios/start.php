@@ -16,21 +16,20 @@
     @import url(https://fonts.googleapis.com/icon?family=Material+Icons);
 </style>
 <div class="container">
-    <form class="col s12" method="post" action="?controller=usuarioComun&action=start">
+    <form class="col s12" method="post" action="?controller=usuarioComun&action=iniciar">
         <div class="row">
             <div class="input-field hoverable col s12">
                 <i class="material-icons prefix">account_circle</i>
-                <input id="username" type="text" class="validate">
+                <input id="username" type="text" class="validate" name="nombre">
                 <label for="username">Nombre de usuario</label>
             </div>
             <div class="input-field hoverable col s12">
                 <i class="material-icons prefix">vpn_key</i>
-                <input id="password" type="password" class="validate">
+                <input id="password" type="password" class="validate" name="contraseña">
                 <label for="password">Contraseña</label>
             </div>
         </div>
-
-        <a class="waves-effect waves-light btn right hoverable"><i class="large material-icons right">lock_open</i>Iniciar Sesión</a>
+        <input type="submit" value="Iniciar sesión" class="waves-effect waves-light btn right hoverable">
     </form>
 </div>
 

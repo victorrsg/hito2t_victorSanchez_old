@@ -8,13 +8,9 @@ abstract class usuario{
 
     // Constructor
 
-    public function __construct($id, $nombre, $contraseña, $correo, $foto)
+    public function __construct()
     {
-        $this->id = $id;
-        $this->nombre = $nombre;
-        $this->contraseña = $contraseña;
-        $this->correo = $correo;
-        $this->foto = $foto;
+
     }
 
     // GETTERS Y SETTERS
