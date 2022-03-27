@@ -70,15 +70,19 @@ abstract class usuario{
 
         $select=$db->query('SELECT * FROM usuariocomun order by id');
 
-        foreach($select->fetchAll() as $usuario){
-            $listausuarios=new usuarioComun();
-            $listausuarios->setId($usuario['id']);
-            $listausuarios->setNombre($usuario['nombre']);
-            $listausuarios->setContraseña($usuario['contraseña']);
-            $listausuarios->setCorreo($usuario['email']);
-            $listausuarios->setFoto($usuario['foto']);
+
+            foreach($select->fetchAll() as $usuario){
+                $listausuarios=new usuarioComun();
+                $listausuarios->setId($usuario['id']);
+                $listausuarios->setNombre($usuario['nombre']);
+                $listausuarios->setContraseña($usuario['contraseña']);
+                $listausuarios->setCorreo($usuario['email']);
+                $listausuarios->setFoto($usuario['foto']);
+            }
+            return $listausuarios;
         }
-        return $listausuarios;
-    }
+
+
+
 
 }

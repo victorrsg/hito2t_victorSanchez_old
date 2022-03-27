@@ -22,6 +22,44 @@ class usuarioComunController{
         require_once ('Views/Usuarios/start.php');
     }
 
+    public function iniciar(){
+        session_start();
+
+        $nombre = $_POST['nombre'];
+        $contraseña = $_POST['contraseña'];
+
+        $usuario=$this->obtenerUsuario($nombre, $contraseña);
+        if($usuario){
+            if ($usuario->getId() != NULL) {
+                $_SESSION['usuarioComun'] = $usuario;
+                echo "Sesión iniciada con exito, ya puede visualizar la información de la cuenta";
+                $this->info($nombre,$contraseña);
+                header('location:index.php?controller=usuarioComun&action=info');
+            } else {
+                echo 'La contraseña de verificación no coincide.';
+            }
+        }
+        else{
+            echo "Usuario o contraseña incorrecta";
+        }
+
+
+    }
+
+    public function info(){
+        $listaUsuarios=usuario::all();
+        require_once ('Views/Usuarios/info.php');
+    }
+
+    public function delete(){
+        require_once ('Views/Usuarios/delete.php');
+    }
+    public function cerrar_sesion(){
+        unset($_SESSION['usuarioComun']);
+        require_once ('Views/Usuarios/start.php');
+    }
+
+    //-------------------------------------------------------------------------------
     // API SERVICE: Métodos CRUD
 
     public function save(){
@@ -47,33 +85,6 @@ class usuarioComunController{
 
     }
 
-
-
-    public function iniciar(){
-        session_start();
-
-        $nombre = $_POST['nombre'];
-        $contraseña = $_POST['contraseña'];
-
-        $usuario=$this->obtenerUsuario($nombre, $contraseña);
-        if($usuario){
-            if ($usuario->getId() != NULL) {
-                $_SESSION['usuarioComun'] = $usuario;
-                echo "Sesión iniciada con exito, ya puede visualizar la información de la cuenta";
-                $this->info($nombre,$contraseña);
-                header('location:index.php?controller=usuarioComun&action=info');
-            } else {
-                echo 'La contraseña de verificación no coincide.';
-            }
-        }
-        else{
-            echo "Usuario o contraseña incorrecta";
-        }
-
-
-    }
-
-
     public function obtenerUsuario($nombre, $contraseña){
         $db=DB::getConnect();
         $select=$db->prepare('SELECT * FROM usuariocomun WHERE nombre=:nombre');
@@ -90,25 +101,23 @@ class usuarioComunController{
                 $usuario->setContraseña($registro['contraseña']);
                 $usuario->setCorreo($registro['email']);
                 $usuario->setFoto($registro['foto']);
-
             }
-
             return $usuario;
+
         }
 
     }
 
+    public function eliminar(){
+        $id=$_POST['id'];
 
-
-
-    public function delete(){
-
+        $conexion=DB::getConnect();
+        $conexion->query("call delete_usuario('$id')");
+        require_once ('Views/Usuarios/start.php');
     }
 
-    public function info(){
-        $listaUsuarios=usuario::all();
-        require_once ('Views/Usuarios/info.php');
-    }
+
+
 
     public function modify(){
         require_once ('Views/Usuarios/error.php');

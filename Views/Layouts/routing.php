@@ -1,6 +1,6 @@
 <?php
 $controllers = array(
-    'usuarioComun' => ['index', 'register','start','error','info','modify','delete','iniciar', 'save'],
+    'usuarioComun' => ['index', 'register','start','error','info','modify','delete','iniciar', 'save', 'eliminar','cerrar_sesion'],
     'admin' => ['index', 'register','start','error','info','modify','delete','update']
 
 );
