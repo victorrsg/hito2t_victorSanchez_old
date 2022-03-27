@@ -1,26 +1,26 @@
-<table class="table">
-    <thead>
-    <tr>
-        <th scope="col">id</th>
-        <th scope="col">Email</th>
-        <th scope="col">Contraseña</th>
-        <th scope="col">Estado</th>
-    </tr>
-    </thead>
-    <tbody>
-    <?php
-        foreach ($resultado as $alumno){
-        echo "<tr><td>";
-        echo $alumno[0];
-        echo "</td><td>";
-        echo $alumno[1];
-        echo "</td><td>";
-        echo $alumno[2];
-        echo "</td><td>";
-        echo $alumno[3];
-        echo "</td></tr>";
-        }
-    ?>
-    </tbody>
-</table>
+<div class="table-responsive">
+    <table class="table table-hover">
+        <thead>
+        <tr>
+            <th>Id</th>
+            <th>Nombre de usuario</th>
+            <th>Contraseña</th>
+            <th>Correo</th>
+            <th>Foto</th>
+        </tr>
+        <tbody>
+            <tr>
+                <td><?php echo $listaUsuarios->getId(); ?></td>
+                <td><?php echo $listaUsuarios->getNombre(); ?></td>
+                <td><?php echo $listaUsuarios->getContraseña(); ?></td>
+                <td><?php echo $listaUsuarios->getCorreo(); ?></td>
+                <td><img src="<?php echo $listaUsuarios->getFoto(); ?>" width="200px" </td>
+            </tr>
+
+        </tbody>
+
+        </thead>
+    </table>
+
+</div>
 

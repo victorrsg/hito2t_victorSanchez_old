@@ -42,10 +42,7 @@ class usuarioComunController{
 
         }
         else{
-            echo '<script type="text/javascript">
-            alert("Las contraseñas no coinciden");
-            window.location.href="index.php?controller=usuarioComun&action=register";
-            </script>';
+            echo 'Las contraseñas no coinciden';
         }
 
     }
@@ -59,15 +56,20 @@ class usuarioComunController{
         $contraseña = $_POST['contraseña'];
 
         $usuario=$this->obtenerUsuario($nombre, $contraseña);
-        if ($usuario->getId() != NULL) {
-            $_SESSION['usuarioComun'] = $usuario;
-            header('location:Views/Usuarios/info.php');
-        } else {
-            echo '<script type="text/javascript">
-            alert("El nombre de usuario o la contraseña son incorrectos");
-            window.location.href="index.php?controller=usuarioComun&action=start";
-            </script>';
+        if($usuario){
+            if ($usuario->getId() != NULL) {
+                $_SESSION['usuarioComun'] = $usuario;
+                echo "Sesión iniciada con exito, ya puede visualizar la información de la cuenta";
+                $this->info($nombre,$contraseña);
+                header('location:index.php?controller=usuarioComun&action=info');
+            } else {
+                echo 'La contraseña de verificación no coincide.';
+            }
         }
+        else{
+            echo "Usuario o contraseña incorrecta";
+        }
+
 
     }
 
@@ -80,15 +82,19 @@ class usuarioComunController{
 
         $registro=$select->fetch();
         $usuario=new usuarioComun();
-        if (password_verify($contraseña, $registro['contraseña'])) {
-            $usuario->setId($registro['id']);
-            $usuario->setNombre($registro['nombre']);
-            $usuario->setContraseña($registro['contraseña']);
-            $usuario->setCorreo($registro['email']);
-            $usuario->setFoto($registro['foto']);
 
+        if($registro){
+            if (password_verify($contraseña, $registro['contraseña'])) {
+                $usuario->setId($registro['id']);
+                $usuario->setNombre($registro['nombre']);
+                $usuario->setContraseña($registro['contraseña']);
+                $usuario->setCorreo($registro['email']);
+                $usuario->setFoto($registro['foto']);
+
+            }
+
+            return $usuario;
         }
-        return $usuario;
 
     }
 
@@ -100,6 +106,7 @@ class usuarioComunController{
     }
 
     public function info(){
+        $listaUsuarios=usuario::all();
         require_once ('Views/Usuarios/info.php');
     }
 

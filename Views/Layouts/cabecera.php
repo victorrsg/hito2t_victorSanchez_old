@@ -7,6 +7,6 @@
         <a class="nav-link" href="?controller=usuarioComun&action=register">Registrar</a>
     </li>
     <li class="nav-item">
-        <a class="nav-link" href="#">Información de la cuenta</a>
+        <a class="nav-link" href="?controller=usuarioComun&action=info">Información de la cuenta</a>
     </li>
 </ul>
